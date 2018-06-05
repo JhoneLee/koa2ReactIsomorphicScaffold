@@ -3,7 +3,7 @@
 * @Author: liyunjiao
 * @Date:   2018-05-16 15:02:08
 * @Last Modified by:   liyunjiao
-* @Last Modified time: 2018-05-16 15:14:54
+* @Last Modified time: 2018-05-28 19:35:03
 */
 
 // 根据es-checker 的检测结果选择适当的babel插件
@@ -36,4 +36,8 @@ var path = require('path');
 var babelConfig = JSON.parse(fs.readFileSync(path.join(__dirname , '../.babelrc')));
 br(babelConfig);
 require('source-map-support').install();
-require('./server.dev');
+let pathname = './server.dev';
+if(process.env.NODE_ENV == 'production'){
+    pathname = './server.prod';
+}
+require(pathname);

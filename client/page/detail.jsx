@@ -3,7 +3,7 @@ import { Layout,Input,Icon,Button,message,Spin } from 'antd';
 import {connect} from 'react-redux';
 import {detailReceive} from '../action';
 import mkFetchFunc from '../common/fetchData';
-// import '../less/home.less';
+import '../less/detail.less';
 import img from '../image/loading.gif';
 const { Header, Content} = Layout;
 const fetchApis = mkFetchFunc(detailReceive);
@@ -48,6 +48,7 @@ class Detail extends Component{
                         <Layout>
                             <Content>
                                 <h2>电影《{title}》详情</h2>
+                                <div className="test-class"></div>
                             </Content>
                         </Layout>
                     </Content>

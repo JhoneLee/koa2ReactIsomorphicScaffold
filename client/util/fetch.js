@@ -2,11 +2,12 @@
 * @file: fetch封装
 * @Author: liyunjiao
 * @Date:   2018-05-15 14:13:21
-* @Last Modified by:   liyunjiao
-* @Last Modified time: 2018-05-18 16:10:06
+* @Last Modified by:   liyunjiao2048@163.com
+* @Last Modified time: 2018-07-13 16:57:14
 */
 
 import {serialize} from './tools';
+import fetch from 'isomorphic-fetch';
 import URLSearchParams from 'url-search-params';
 /**
  * ------------------------------------------------------------------
@@ -20,9 +21,8 @@ import URLSearchParams from 'url-search-params';
  */
 export default function fetchUtil(opt) {
     const {url, method, params, headers} = opt;
-    
     let window = window || false;
-    let fullUrl = url;
+    let fullUrl = url || 'http://localhost:4444';
     let data = {};
     let defaultHeaders = {
         'Accept': 'application/json', // 'application/json, application/xml, text/play, text/html, *.*',

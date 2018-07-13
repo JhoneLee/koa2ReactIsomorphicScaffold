@@ -2,8 +2,8 @@
 * @file: api汇总
 * @Author: liyunjiao
 * @Date:   2018-05-16 17:36:15
-* @Last Modified by:   liyunjiao
-* @Last Modified time: 2018-05-17 11:34:47
+* @Last Modified by:   liyunjiao2048@163.com
+* @Last Modified time: 2018-07-12 18:50:52
 */
 
 import Router from 'koa-router';
@@ -15,7 +15,7 @@ let router = new Router({
 
 router.all('/',async (ctx,next)=>{
     ctx.set('Content-Type','text/json; charset=UTF-8');
-    ctx.set('Access-Control-Allow-Origin','http://127.0.0.1:4444');
+    ctx.set('Access-Control-Allow-Origin',ctx.request.origin);
     ctx.set('Access-Control-Allow-Credentials',true);
     ctx.set('Access-Control-Allow-Headers','Content-Type');
     await next();

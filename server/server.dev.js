@@ -2,8 +2,8 @@
 * @file: dev 开发环境文件
 * @Author: liyunjiao
 * @Date:   2018-05-16 14:59:31
-* @Last Modified by:   liyunjiao
-* @Last Modified time: 2018-05-17 17:53:55
+* @Last Modified by:   liyunjiao2048@163.com
+* @Last Modified time: 2018-07-13 17:27:54
 */
 
 import Koa from 'koa';
@@ -22,6 +22,7 @@ import logger from 'koa-logger';
 import livereload from 'koa-livereload';
 import catchErr from './middleware/catchErr';
 import page404 from './middleware/page404';
+import favicon from 'koa-favicon';
 const PORT = 4444;
 const {devMiddleware,hotMiddleware} = koaWebpackMiddleware;
 let compiler = webpack(config);
@@ -65,13 +66,15 @@ app.use(convert(hotMiddleware(compiler)));
 // post body参数序列化
 app.use(bodyParser());
 app.use(catchErr);
-
-// 加载路由
+app.use(favicon(path.resolve(__dirname,'./assets/favicon.png')));
+// 服务端渲染
+app.use(rootM);
+// 加载api路由
 app.use(router.routes());
 app.use(router.allowedMethods());
 // 打 log
-app.use(logger());
-app.use(rootM);
+// app.use(logger());
+
 app.use(page404);
 app.listen(PORT);
 console.log('koa server opening');

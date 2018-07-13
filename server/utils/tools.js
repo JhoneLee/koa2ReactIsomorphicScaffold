@@ -2,8 +2,8 @@
 * @file: 工具函数
 * @Author: liyunjiao
 * @Date:   2018-05-18 15:26:09
-* @Last Modified by:   liyunjiao
-* @Last Modified time: 2018-05-18 15:36:15
+* @Last Modified by:   liyunjiao2048@163.com
+* @Last Modified time: 2018-07-13 16:07:10
 */
 
 export function dealPath(path,data){
@@ -20,4 +20,18 @@ export function dealPath(path,data){
         }
     })
     return res.join('/');
+}
+
+export function htmlDecode(str) {
+    var s = "";
+    if (str.length == 0) return "";
+    s = str.replace(/>/g, "&");
+    s = s.replace(/</g, "<");
+    s = s.replace(/>/g, ">");
+    s = s.replace(/ /g, "");
+    s = s.replace(/'/g, "\'");
+    s = s.replace(/"/g, "\"");
+    s = s.replace(/<br>/g, "\n");
+    s = s.replace(/&nbsp;/g,"");
+    return s;
 }

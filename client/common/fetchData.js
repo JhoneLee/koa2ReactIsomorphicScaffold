@@ -2,8 +2,8 @@
 * @file: 获取接口数据
 * @Author: liyunjiao
 * @Date:   2018-05-15 14:15:02
-* @Last Modified by:   liyunjiao
-* @Last Modified time: 2018-05-18 16:25:39
+* @Last Modified by:   liyunjiao2048@163.com
+* @Last Modified time: 2018-07-13 15:49:42
 */
 
 import fetch from '../util/fetch';
@@ -92,7 +92,8 @@ export default function mkFetchPost(receive){
                 // 隐藏loading
                 dispatch(requestPosts('hide'));
                 if(json){
-                    if(judgeType(json) == 'object' && json.status == 1){
+                    console.log(json,'fetch');
+                    if(judgeType(json) == 'object' && json.status == 0){
                         // 请求成功
                         success(json);
                     } else {

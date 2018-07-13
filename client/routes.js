@@ -2,8 +2,8 @@
 * @file: 路由文件
 * @Author: liyunjiao
 * @Date:   2018-05-14 15:15:42
-* @Last Modified by:   liyunjiao
-* @Last Modified time: 2018-05-17 17:55:43
+* @Last Modified by:   liyunjiao2048@163.com
+* @Last Modified time: 2018-07-13 17:13:25
 */
 
 import Home from './page/home';
@@ -13,8 +13,7 @@ import NotFound from './page/notFound';
 const routes = [{
     path: '/home',
     component: Home,
-    exact: true,
-    apis:['datalist']
+    exact: true
 },{
     path: '/page',
     component: Layout,

@@ -16,14 +16,14 @@ class Detail extends Component{
         let _this = this;
         let {id} = this.props.match.params;
         let {data} = this.props.stateData.movieDetail;
-        if(!data || id!=data.id){
+        if(!data || id!=data.m_id){
             this.props.getData({
                 api:`detail`,
                 params:{},
                 pathParams:[id],
                 success(res){
                     message.success('详情请求成功');
-                    console.log(res);
+                    // console.log(res);
                 },
                 error(e){
                     console.error(e);
@@ -38,9 +38,9 @@ class Detail extends Component{
     render(){
         let {getData,stateData} = this.props;
         let {requestPosts,movieDetail} = stateData;
-        console.log(stateData);
+        // console.log(stateData);
         let flag = requestPosts === 'hide'?false:true;
-        let title = movieDetail.data && movieDetail.data.title || ''
+        let title = movieDetail.data && movieDetail.data.m_name || ''
         return (
             <Layout className="detail-page">
                 <Spin tip="数据加载中..." spinning={flag}>

@@ -2,8 +2,8 @@
 * @file:详情页action
 * @Author: liyunjiao
 * @Date:   2018-05-16 11:25:54
-* @Last Modified by:   liyunjiao
-* @Last Modified time: 2018-05-17 16:55:26
+* @Last Modified by:   liyunjiao2048@163.com
+* @Last Modified time: 2018-07-12 18:45:50
 */
 
 export const MOVIE_DETAIL = 'MOVIE_DETAIL';
@@ -20,6 +20,5 @@ const dic = {
 };
 
 export function detailReceive(subreddit, json) {
-    console.log(subreddit);
     return dic[subreddit](json);
 }

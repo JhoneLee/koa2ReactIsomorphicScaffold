@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {Layout,Button,Icon,Modal} from 'antd';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import '../less/layout.less';
 import RouteWithSubRoutes from '../components/RouteWithSubRoutes';
 const {Content,Sider,Header} = Layout;
@@ -32,7 +33,7 @@ class Struct extends Component {
             <RouteWithSubRoutes key={i} {...route}/>
         ));
         let titleBar = (
-            <div>我是layout</div>
+            <div>我是layout<Link to="/home">返回首页</Link></div>
         );
         
         return (

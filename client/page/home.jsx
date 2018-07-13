@@ -17,7 +17,7 @@ class Home extends Component{
         console.log('react componentWillMount');
         let _this = this;
         let {data} = this.props.stateData.homeList;
-        if(data.subjects.length<1){
+        if(!data || !data.list || data.list.length<1){
             this.props.getData({
                 api:'datalist',
                 params:{},
@@ -39,9 +39,10 @@ class Home extends Component{
         let {getData,stateData} = this.props;
         let {requestPosts} = stateData;
         let flag = requestPosts === 'hide'?false:true;
-        let {subjects,total} = stateData.homeList.data;
-        let list = [];
-        list.push(subjects.map((e)=>{
+        let {list} = stateData.homeList.data;
+        console.log(stateData.homeList);
+        let arr = [];
+        arr.push(list.map((e)=>{
             return (<HomeDataItem data={e}/>)
         }));
         return (
@@ -50,9 +51,9 @@ class Home extends Component{
                     <Content className="main">
                         <Layout>
                             <Content className="home-center">
-                                <h1>正在热映{total}个电影</h1>
+                                <h1>正在热映{list.length}个电影</h1>
                                 <ul className="data-list">
-                                    {list}
+                                    {arr}
                                 </ul>
                             </Content>
                         </Layout>

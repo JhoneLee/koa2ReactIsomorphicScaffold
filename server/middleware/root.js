@@ -2,8 +2,8 @@
 * @file: 
 * @Author: liyunjiao
 * @Date:   2018-05-16 17:21:33
-* @Last Modified by:   liyunjiao
-* @Last Modified time: 2018-05-18 15:37:03
+* @Last Modified by:   liyunjiao2048@163.com
+* @Last Modified time: 2018-07-13 17:24:52
 */
 
 import React from 'react';
@@ -22,6 +22,7 @@ let roots = async (ctx,next)=>{
         ctx.redirect('/home');
         return;
     }
+    console.log(ctx.url,'root');
     let routers = rangeRoute(routes);
     let rmatch = false;
     routers.forEach(route => {

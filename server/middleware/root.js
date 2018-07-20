@@ -3,7 +3,7 @@
 * @Author: liyunjiao
 * @Date:   2018-05-16 17:21:33
 * @Last Modified by:   liyunjiao2048@163.com
-* @Last Modified time: 2018-07-13 17:24:52
+* @Last Modified time: 2018-07-19 16:38:13
 */
 
 import React from 'react';
@@ -22,7 +22,6 @@ let roots = async (ctx,next)=>{
         ctx.redirect('/home');
         return;
     }
-    console.log(ctx.url,'root');
     let routers = rangeRoute(routes);
     let rmatch = false;
     routers.forEach(route => {
@@ -31,7 +30,6 @@ let roots = async (ctx,next)=>{
             rmatch = match;
         }
     });
-    console.log(rmatch);
     const context = {};
     if(rmatch){
         let {path,params} = rmatch;

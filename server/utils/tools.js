@@ -3,7 +3,7 @@
 * @Author: liyunjiao
 * @Date:   2018-05-18 15:26:09
 * @Last Modified by:   liyunjiao2048@163.com
-* @Last Modified time: 2018-07-13 16:07:10
+* @Last Modified time: 2018-07-20 14:47:39
 */
 
 export function dealPath(path,data){
@@ -35,3 +35,25 @@ export function htmlDecode(str) {
     s = s.replace(/&nbsp;/g,"");
     return s;
 }
+
+export function convertMapToArray(map) {
+    var result = [];
+    var pos = 0;
+    map.forEach(function (value, key) {
+        result[pos] = key;
+        result[pos + 1] = value;
+        pos += 2;
+    });
+    return result;
+};
+
+
+export function convertObjectToArray(obj) {
+    var result = [];
+    var keys = Object.keys(obj);
+
+    for (var i = 0, l = keys.length; i < l; i++) {
+        result.push(keys[i], obj[keys[i]]);
+    }
+    return result;
+};

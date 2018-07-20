@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {homeReceive} from '../action';
 import mkFetchFunc from '../common/fetchData';
 import HomeDataItem from '../components/HomeDataItem';
+import Login from '../components/Login';
 import '../less/home.less';
 import img from '../image/loading.gif';
 const { Header, Content} = Layout;
@@ -11,6 +12,9 @@ const fetchApis = mkFetchFunc(homeReceive);
 class Home extends Component{
     constructor(props){
         super(props);
+        this.state = {
+            loginFlag:'none'
+        }
     }
     
     componentWillMount(){
@@ -33,7 +37,17 @@ class Home extends Component{
             })
         }
     }
-    
+    handleLoginClick(){
+        this.setState({
+            loginFlag:'block'
+        });
+    }
+    closeLoginDialog(){
+        this.setState({
+            loginFlag:'none'
+        });
+    }
+
     render(){
         console.log('react render');
         let {getData,stateData} = this.props;
@@ -42,11 +56,17 @@ class Home extends Component{
         let {list} = stateData.homeList.data;
         console.log(stateData.homeList);
         let arr = [];
+        let {loginFlag} = this.state;
         arr.push(list.map((e)=>{
             return (<HomeDataItem data={e}/>)
         }));
         return (
             <Layout className="home-page">
+                <Header>
+                    <h1>koa2+react同构直出测试项目</h1>
+                    <a href="javascript:;" onClick={this.handleLoginClick.bind(this)}>请登录</a>
+                    <Login flag={loginFlag} closeLoginDialog = {this.closeLoginDialog.bind(this)}/>
+                </Header>
                 <Spin tip="数据加载中..." spinning={flag}>
                     <Content className="main">
                         <Layout>

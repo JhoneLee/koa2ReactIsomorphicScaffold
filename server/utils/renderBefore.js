@@ -3,7 +3,7 @@
 * @Author: liyunjiao
 * @Date:   2018-05-17 18:24:31
 * @Last Modified by:   liyunjiao2048@163.com
-* @Last Modified time: 2018-07-13 16:46:39
+* @Last Modified time: 2018-07-19 16:39:07
 */
 
 import table from './apiTable';
@@ -22,7 +22,6 @@ async function renderBefore(path,params){
             data = data || init || {};
             stateObj.reducer[state] = data;
         }
-        console.log(stateObj,'renderBefore');
         return stateObj;
     }
 }

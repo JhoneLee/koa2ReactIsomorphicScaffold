@@ -3,7 +3,7 @@
 * @Author: liyunjiao
 * @Date:   2018-05-15 14:13:21
 * @Last Modified by:   liyunjiao2048@163.com
-* @Last Modified time: 2018-07-13 16:57:14
+* @Last Modified time: 2018-07-23 13:39:42
 */
 
 import {serialize} from './tools';
@@ -22,7 +22,7 @@ import URLSearchParams from 'url-search-params';
 export default function fetchUtil(opt) {
     const {url, method, params, headers} = opt;
     let window = window || false;
-    let fullUrl = url || 'http://localhost:4444';
+    let fullUrl = 'http://localhost:4444'+url;
     let data = {};
     let defaultHeaders = {
         'Accept': 'application/json', // 'application/json, application/xml, text/play, text/html, *.*',

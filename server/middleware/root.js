@@ -3,7 +3,7 @@
 * @Author: liyunjiao
 * @Date:   2018-05-16 17:21:33
 * @Last Modified by:   liyunjiao2048@163.com
-* @Last Modified time: 2018-07-19 16:38:13
+* @Last Modified time: 2018-07-23 16:43:05
 */
 
 import React from 'react';
@@ -21,6 +21,9 @@ let roots = async (ctx,next)=>{
     if(ctx.url == '/'){
         ctx.redirect('/home');
         return;
+    } else if(ctx.url == '/notFound'){
+        await next();
+        return;
     }
     let routers = rangeRoute(routes);
     let rmatch = false;
@@ -34,6 +37,8 @@ let roots = async (ctx,next)=>{
     if(rmatch){
         let {path,params} = rmatch;
         let preState = await renderBefore(path,params);
+        let obj = Object.assign({},preState.reducer,{username:ctx.session.user_name});
+        preState.reducer = obj;
         let pStr = JSON.stringify(preState);
         let store = makeStore(preState);
         await ctx.render('index',{

@@ -3,7 +3,7 @@
 * @Author: liyunjiao
 * @Date:   2018-05-18 15:26:09
 * @Last Modified by:   liyunjiao2048@163.com
-* @Last Modified time: 2018-07-20 14:47:39
+* @Last Modified time: 2018-07-23 15:07:55
 */
 
 export function dealPath(path,data){
@@ -56,4 +56,16 @@ export function convertObjectToArray(obj) {
         result.push(keys[i], obj[keys[i]]);
     }
     return result;
+};
+
+
+export function timeStamp2String (datetime){
+    var year = datetime.getFullYear();
+    var month = datetime.getMonth() + 1;
+    var date = datetime.getDate();
+    var hour = datetime.getHours();
+    var minute = datetime.getMinutes();
+    var second = datetime.getSeconds();
+    var mseconds = datetime.getMilliseconds();
+    return year + "-" + month + "-" + date+" "+hour+":"+minute+":"+second+"."+mseconds;
 };

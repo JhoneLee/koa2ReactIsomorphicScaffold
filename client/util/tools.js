@@ -2,8 +2,8 @@
 * @file: 工具函数集锦
 * @Author: liyunjiao
 * @Date:   2018-05-15 14:10:21
-* @Last Modified by:   liyunjiao
-* @Last Modified time: 2018-05-15 14:13:11
+* @Last Modified by:   liyunjiao2048@163.com
+* @Last Modified time: 2018-07-23 14:01:26
 */
 
 /**
@@ -31,5 +31,16 @@ export function serialize(obj) {
     for (const k in obj) {
         result.push(encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]));
     }
+    return result.join('&');
+}
+
+// 生成md5字符串
+export function md5String(arr) {
+    const result = [];
+    arr.forEach((e, i)=>{
+        for (let k in e) {
+            result.push(k + '=' + e[k]);
+        }
+    });
     return result.join('&');
 }

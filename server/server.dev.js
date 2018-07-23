@@ -3,7 +3,7 @@
 * @Author: liyunjiao
 * @Date:   2018-05-16 14:59:31
 * @Last Modified by:   liyunjiao2048@163.com
-* @Last Modified time: 2018-07-20 15:46:09
+* @Last Modified time: 2018-07-23 13:08:24
 */
 
 import Koa from 'koa';
@@ -25,7 +25,7 @@ import page404 from './middleware/page404';
 
 import favicon from 'koa-favicon'; // 可要可不要
 // 引入session
-import session from 'koa-session';
+import session from 'koa-session2';
 import CONF,{verify} from './middleware/session';
 // 引入redis 管理session
 import store from './redis';
@@ -79,7 +79,7 @@ app.use(favicon(path.resolve(__dirname,'./assets/favicon.png')));
 // 引入session
 app.keys = ['jhonelee'];
 let sessConf = Object.assign({},CONF,{store});
-app.use(session(sessConf,app));
+app.use(session(sessConf));
 // post body参数序列化
 app.use(bodyParser());
 // session 校验

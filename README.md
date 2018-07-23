@@ -21,6 +21,8 @@ npm install
 > * 开发时前后端分离
 > * 引入redux 及 react-router
 > * 使用 fetch 请求数据
+> * 使用 mysql 进行数据存储及接口数据源
+> * 使用 redis 进行session管理,用户持久性数据存储于mysql
 ------
 ## demo的简单表结构[^code]
 
@@ -60,6 +62,22 @@ CREATE TABLE `movie_detail` (
 ```
 
 
+### 用户表
+```sql
+CREATE TABLE `user` (
+  `user_id` bigint(15) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `user_name` varchar(128) NOT NULL COMMENT '用户名称',
+  `name` varchar(128) NOT NULL COMMENT '真实姓名',
+  `user_type` smallint(2) NOT NULL COMMENT '用户类型 0普通用户 1vip用户',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `last_access_time` bigint(15) NOT NULL DEFAULT '0' COMMENT '最后登录时间',
+  `token` varchar(32) NOT NULL DEFAULT '0' COMMENT '登录凭证',
+  `openid` varchar(50) NOT NULL COMMENT '唯一标识',
+  PRIMARY KEY (`user_id`),
+  KEY `user_name_index` (`user_name`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='用户表';
+```
+
 
 ## 各项依赖版本
 
@@ -69,5 +87,6 @@ CREATE TABLE `movie_detail` (
 |webpack|3.4.1|
 |antd|3.x|
 |mysql|2.15|
+|ioredis|3.2.2|
 
 

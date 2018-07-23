@@ -3,7 +3,7 @@
 * @Author: liyunjiao
 * @Date:   2018-05-15 14:15:02
 * @Last Modified by:   liyunjiao2048@163.com
-* @Last Modified time: 2018-07-13 15:49:42
+* @Last Modified time: 2018-07-23 13:55:53
 */
 
 import fetch from '../util/fetch';
@@ -109,4 +109,40 @@ export default function mkFetchPost(receive){
             });
         };
     }
+}
+
+
+export function simpleFetch(opt){
+    let {api,params,success,error,method,timeout} = opt;
+    let dataUrl = `${BASE}${api}`;
+    timeout = timeout || 30000;
+    return wrapFetch(fetch({
+        url:dataUrl,
+        params:params,
+        method
+    }),timeout).then((response)=>{
+        return response.json();
+    },(error)=>{
+        console.log(error);
+        // 网络中断处理
+        let text = '网络不给力，请检查网络后重试';
+        // Modal.error({
+        //     title:'请求失败',
+        //     content:text
+        // });
+        console.log(text);
+    }).then((json)=>{
+        if(json){
+            console.log(json,'fetch');
+            if(judgeType(json) == 'object' && json.status == 0){
+                // 请求成功
+                success(json);
+            } else {
+                error(json);
+            }
+        }
+    }).catch(err => {
+        // 捕捉其他一切未知错误
+        error(err);
+    });
 }

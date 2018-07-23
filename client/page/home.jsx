@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import { Layout,Input,Icon,Button,message,Spin } from 'antd';
 import {connect} from 'react-redux';
 import {homeReceive} from '../action';
-import mkFetchFunc from '../common/fetchData';
+import mkFetchFunc,{simpleFetch} from '../common/fetchData';
 import HomeDataItem from '../components/HomeDataItem';
 import Login from '../components/Login';
 import '../less/home.less';
@@ -12,15 +12,23 @@ const fetchApis = mkFetchFunc(homeReceive);
 class Home extends Component{
     constructor(props){
         super(props);
+        let {flag} = props.match.params;
+        let loginFlag = flag == 1 ? 'block' : 'none';
         this.state = {
-            loginFlag:'none'
+            loginFlag,
+            uname:false
         }
     }
     
     componentWillMount(){
-        console.log('react componentWillMount');
         let _this = this;
         let {data} = this.props.stateData.homeList;
+        let {username} = this.props.stateData;
+        if(username){
+            this.setState({
+                uname:username
+            });
+        }
         if(!data || !data.list || data.list.length<1){
             this.props.getData({
                 api:'datalist',
@@ -42,29 +50,54 @@ class Home extends Component{
             loginFlag:'block'
         });
     }
-    closeLoginDialog(){
+    handleLogoutClick(){
+        let _this = this;
+        simpleFetch({
+            api:'logout',
+            method:'post',
+            success(){
+                _this.setState({
+                    uname:false
+                });
+            },
+            error(){
+                _this.setState({
+                    uname:false
+                });
+            }
+        })
+    }
+    closeLoginDialog(o,uname){
+        uname = uname || false;
         this.setState({
-            loginFlag:'none'
+            loginFlag:'none',
+            uname
         });
     }
 
     render(){
-        console.log('react render');
         let {getData,stateData} = this.props;
         let {requestPosts} = stateData;
         let flag = requestPosts === 'hide'?false:true;
         let {list} = stateData.homeList.data;
-        console.log(stateData.homeList);
         let arr = [];
-        let {loginFlag} = this.state;
+        let {loginFlag,uname} = this.state;
         arr.push(list.map((e)=>{
             return (<HomeDataItem data={e}/>)
         }));
+        let gotoLigon = (<a href="javascript:;" onClick={this.handleLoginClick.bind(this)}>请登录</a>);
+        if(uname){
+            gotoLigon = (<div className="login-warp">
+                            <a href="javascript:;" onClick={this.handleLogoutClick.bind(this)}>注销登录</a>
+                            <span>您好,{uname}</span>
+                        </div>);
+        }
+        
         return (
             <Layout className="home-page">
                 <Header>
                     <h1>koa2+react同构直出测试项目</h1>
-                    <a href="javascript:;" onClick={this.handleLoginClick.bind(this)}>请登录</a>
+                    {gotoLigon}
                     <Login flag={loginFlag} closeLoginDialog = {this.closeLoginDialog.bind(this)}/>
                 </Header>
                 <Spin tip="数据加载中..." spinning={flag}>
